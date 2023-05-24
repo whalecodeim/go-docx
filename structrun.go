@@ -213,6 +213,7 @@ type RunProperties struct {
 	Underline *Underline
 	VertAlign *VertAlign
 	Strike    *Strike
+	Language  *Language
 }
 
 // UnmarshalXML ...
@@ -302,6 +303,10 @@ func (r *RunProperties) UnmarshalXML(d *xml.Decoder, _ xml.StartElement) error {
 				var value Strike
 				value.Val = getAtt(tt.Attr, "val")
 				r.Strike = &value
+			case "lang":
+				var value Language
+				value.Val = getAtt(tt.Attr, "val")
+				r.Language = &value
 			default:
 				err = d.Skip() // skip unsupported tags
 				if err != nil {
