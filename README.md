@@ -63,7 +63,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/fumiama/go-docx"
+	"github.com/yangge2333/go-docx"
 )
 
 func main() {
@@ -97,7 +97,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/fumiama/go-docx"
+	"github.com/yangge2333/go-docx"
 )
 
 func main() {

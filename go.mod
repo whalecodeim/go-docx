@@ -1,5 +1,7 @@
 module github.com/yangge2333/go-docx
 
-go 1.20
+go 1.19
 
-require github.com/fumiama/imgsz v0.0.2
+require (
+	github.com/fumiama/imgsz v0.0.2
+)
