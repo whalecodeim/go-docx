@@ -51,6 +51,13 @@ type Drawing struct {
 	file *Docx
 }
 
+func (r *Drawing) GetImgBlipEmbed() string {
+	if r.Inline != nil && r.Inline.Graphic != nil && r.Inline.Graphic.GraphicData != nil && r.Inline.Graphic.GraphicData.Pic != nil {
+		return r.Inline.Graphic.GraphicData.Pic.BlipFill.Blip.Embed
+	}
+	return ""
+}
+
 // UnmarshalXML ...
 func (r *Drawing) UnmarshalXML(d *xml.Decoder, _ xml.StartElement) error {
 	for {

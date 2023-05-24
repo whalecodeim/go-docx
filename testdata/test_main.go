@@ -27,6 +27,18 @@ func Fumiama() {
 		case *docx.Paragraph:
 			// printable
 			para := it.(*docx.Paragraph)
+			if len(para.Children) != 0 {
+				runData, _ := para.Children[0].(*docx.Run)
+				if len(runData.Children) != 0 {
+					draw, ok := runData.Children[0].(*docx.Drawing)
+					if ok {
+						picId := draw.GetImgBlipEmbed()
+						picData, _ := doc.RangeRelationshipsPicture(picId)
+						fmt.Println(picData[0])
+					}
+				}
+			}
+			para.DropNilPicture()
 			fmt.Println(para)
 		case *docx.Table:
 			table := it.(*docx.Table)

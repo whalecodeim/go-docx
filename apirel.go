@@ -20,6 +20,11 @@
 
 package docx
 
+import (
+	"errors"
+	"strings"
+)
+
 // RangeRelationships goes through each doc relation
 func (f *Docx) RangeRelationships(iter func(*Relationship) error) error {
 	for _, r := range f.docRelation.Relationship {
@@ -29,4 +34,28 @@ func (f *Docx) RangeRelationships(iter func(*Relationship) error) error {
 		}
 	}
 	return nil
+}
+
+func (f *Docx) RangeRelationshipsPicture(blipEmbed string) ([]byte, error) {
+	target := ""
+	for _, r := range f.docRelation.Relationship {
+		if r.ID == blipEmbed {
+			target = r.Target
+		}
+	}
+	if target == "" {
+		return nil, errors.New("not found")
+	}
+	targetList := strings.Split(target, "/")
+	if len(targetList) <= 1 {
+		return nil, errors.New("target value error " + target)
+	}
+	idx, ok := f.mediaNameIdx[targetList[len(targetList)-1]]
+	if !ok {
+		return nil, errors.New("target not found " + target)
+	}
+	if idx < 0 || idx >= len(f.media) {
+		return nil, errors.New("idx out of range " + target)
+	}
+	return f.media[idx].Data, nil
 }
