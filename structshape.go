@@ -579,8 +579,8 @@ func (b *WPSTextBox) UnmarshalXML(d *xml.Decoder, _ xml.StartElement) error {
 
 // WTextBoxContent ...
 type WTextBoxContent struct {
-	XMLName    xml.Name    `xml:"w:txbxContent,omitempty"`
-	Paragraphs []Paragraph `xml:"w:p,omitempty"`
+	XMLName    xml.Name     `xml:"w:txbxContent,omitempty"`
+	Paragraphs []*Paragraph `xml:"w:p,omitempty"`
 
 	file *Docx
 }
@@ -605,7 +605,7 @@ func (c *WTextBoxContent) UnmarshalXML(d *xml.Decoder, _ xml.StartElement) error
 				if err != nil && !strings.HasPrefix(err.Error(), "expected") {
 					return err
 				}
-				c.Paragraphs = append(c.Paragraphs, value)
+				c.Paragraphs = append(c.Paragraphs, &value)
 			default:
 				err = d.Skip() // skip unsupported tags
 				if err != nil {

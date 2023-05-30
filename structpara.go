@@ -43,8 +43,8 @@ type ParagraphProperties struct {
 	SnapToGrid     *SnapToGrid
 	Kinsoku        *Kinsoku
 	OverflowPunct  *OverflowPunct
-
-	RunProperties *RunProperties
+	NumProperties  *NumProperties
+	RunProperties  *RunProperties
 }
 
 // UnmarshalXML ...
@@ -107,6 +107,13 @@ func (p *ParagraphProperties) UnmarshalXML(d *xml.Decoder, _ xml.StartElement) e
 					return err
 				}
 				p.RunProperties = &value
+			case "numPr":
+				var value NumProperties
+				err = d.DecodeElement(&value, &tt)
+				if err != nil && !strings.HasPrefix(err.Error(), "expected") {
+					return err
+				}
+				p.NumProperties = &value
 			case "pStyle":
 				p.Style = &Style{Val: getAtt(tt.Attr, "val")}
 			case "textAlignment":
