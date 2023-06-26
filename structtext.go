@@ -172,7 +172,7 @@ func MergeSamePropRuns(r1, r2 *Run) bool {
 		}
 		xx2 := x2.Elem()
 		for j := 1; j < xx1.NumField(); j++ {
-			if !xx1.Field(j).Equal(xx2.Field(j)) {
+			if !reflect.DeepEqual(xx1.Field(j), xx2.Field(j)) {
 				return false
 			}
 		}
@@ -215,7 +215,7 @@ func MergeSamePropRunsOf(name ...string) RunMergeRule {
 			}
 			xx2 := x2.Elem()
 			for j := 1; j < xx1.NumField(); j++ {
-				if !xx1.Field(j).Equal(xx2.Field(j)) {
+				if !reflect.DeepEqual(xx1.Field(j), xx2.Field(j)) {
 					return false
 				}
 			}
