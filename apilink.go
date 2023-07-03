@@ -20,6 +20,8 @@
 
 package docx
 
+import "encoding/xml"
+
 //nolint:revive,stylecheck
 const (
 	HYPERLINK_STYLE = "a3"
@@ -34,6 +36,10 @@ func (p *Paragraph) AddLink(text string, link string) *Hyperlink {
 			RunProperties: &RunProperties{
 				RunStyle: &RunStyle{
 					Val: HYPERLINK_STYLE,
+				},
+				Color: &Color{
+					XMLName: xml.Name{},
+					Val:     "blue",
 				},
 			},
 			InstrText: text,
