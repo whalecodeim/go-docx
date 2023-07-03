@@ -189,6 +189,11 @@ type Paragraph struct {
 	file *Docx
 }
 
+// SetFile unsafe
+func (p *Paragraph) SetFile(file *Docx) {
+	p.file = file
+}
+
 func (p *Paragraph) String() string {
 	sb := strings.Builder{}
 	for _, c := range p.Children {
