@@ -49,9 +49,13 @@ func (t *Table) String() string {
 	for _, r := range t.TableRows {
 		sb.WriteString("\n|")
 		for _, c := range r.TableCells {
-			if len(c.Paragraphs) > 0 && len(c.Paragraphs[0].Children) > 0 {
+			para, ok := c.Paragraphs[0].(*Paragraph)
+			if !ok {
+				continue
+			}
+			if len(c.Paragraphs) > 0 && len(para.Children) > 0 {
 				sb.WriteByte(' ')
-				sb.WriteString(c.Paragraphs[0].String())
+				sb.WriteString(para.String())
 			} else {
 				sb.WriteString("       ")
 			}
@@ -536,7 +540,7 @@ type WTableRowHeight struct {
 type WTableCell struct {
 	XMLName             xml.Name `xml:"w:tc,omitempty"`
 	TableCellProperties *WTableCellProperties
-	Paragraphs          []*Paragraph `xml:"w:p,omitempty"`
+	Paragraphs          []interface{} `xml:"w:p,omitempty"`
 
 	file *Docx
 }

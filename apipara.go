@@ -37,7 +37,7 @@ func (c *WTableCell) AddParagraph() *Paragraph {
 		file:     c.file,
 	})
 
-	return c.Paragraphs[len(c.Paragraphs)-1]
+	return c.Paragraphs[len(c.Paragraphs)-1].(*Paragraph)
 }
 
 // Justification allows to set para's horizonal alignment

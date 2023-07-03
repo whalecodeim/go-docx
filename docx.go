@@ -36,7 +36,7 @@ import (
 type Docx struct {
 	Document Document // Document is word/document.xml
 
-	Numbering *Numbering
+	Numbering Numbering
 
 	docRelation Relationships // docRelation is word/_rels/document.xml.rels
 

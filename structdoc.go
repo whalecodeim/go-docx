@@ -334,10 +334,14 @@ func (t *Table) copymedia(to *Docx) (nt Table) {
 		ntr.file = to
 		for _, tc := range tr.TableCells {
 			ntc := *tc
-			ntc.Paragraphs = make([]*Paragraph, 0, len(tc.Paragraphs))
+			ntc.Paragraphs = make([]interface{}, 0, len(tc.Paragraphs))
 			ntc.file = to
 			for _, p := range tc.Paragraphs {
-				np := p.copymedia(to)
+				para, ok := p.(*Paragraph)
+				if !ok {
+					continue
+				}
+				np := para.copymedia(to)
 				ntc.Paragraphs = append(ntc.Paragraphs, &np)
 			}
 			ntr.TableCells = append(ntr.TableCells, &ntc)

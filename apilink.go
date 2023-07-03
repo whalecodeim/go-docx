@@ -20,7 +20,9 @@
 
 package docx
 
-import "encoding/xml"
+import (
+	"encoding/xml"
+)
 
 //nolint:revive,stylecheck
 const (
