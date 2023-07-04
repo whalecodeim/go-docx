@@ -11,9 +11,6 @@ func Fumiama() {
 	d := docx.NewA4()
 	p := d.AddParagraph()
 	p.AddLink("link", "b")
-	table := d.AddTable(1, 2)
-	para := table.TableRows[0].TableCells[1].AddParagraph()
-	para.AddText("hello")
 
 	f, err := os.Create("testdata/test_out.docx")
 	if err != nil {

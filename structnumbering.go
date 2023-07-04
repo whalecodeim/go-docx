@@ -1,6 +1,9 @@
 package docx
 
-import "encoding/xml"
+import (
+	"encoding/xml"
+	"io"
+)
 
 type Numbering struct {
 	XMLName xml.Name `xml:"w:numbering"`
@@ -69,4 +72,27 @@ type LvlText struct {
 type LvlJc struct {
 	XMLName xml.Name `xml:"w:lvlJc"`
 	Val     string   `xml:"w:val"`
+}
+
+func (p *Numbering) UnmarshalXML(d *xml.Decoder, _ xml.StartElement) error {
+	for {
+		t, err := d.Token()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return err
+		}
+		if tt, ok := t.(xml.StartElement); ok {
+			switch tt.Name.Local {
+			default:
+				err = d.Skip() // skip unsupported tags
+				if err != nil {
+					return err
+				}
+				continue
+			}
+		}
+	}
+	return nil
 }

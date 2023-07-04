@@ -190,7 +190,10 @@ func main() {
 				for _, tr := range o.TableRows {
 					for _, tc := range tr.TableCells {
 						for _, p := range tc.Paragraphs {
-							p.Properties = nil
+							para, ok := p.(*docx.Paragraph)
+							if ok {
+								para.Properties = nil
+							}
 						}
 					}
 				}
