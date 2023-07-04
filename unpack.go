@@ -58,13 +58,13 @@ func unpack(zipReader *zip.Reader) (docx *Docx, err error) {
 			}
 			continue
 		}
-		if f.Name == "word/numbering.xml" {
-			err = docx.parseNumbering(f)
-			if err != nil {
-				return
-			}
-			continue
-		}
+		//if f.Name == "word/numbering.xml" {
+		//	err = docx.parseNumbering(f)
+		//	if err != nil {
+		//		return
+		//	}
+		//	continue
+		//}
 		if strings.HasPrefix(f.Name, MEDIA_FOLDER) {
 			err = docx.parseMedia(f)
 			if err != nil {
@@ -80,32 +80,32 @@ func unpack(zipReader *zip.Reader) (docx *Docx, err error) {
 	return
 }
 
-func (f *Docx) parseNumbering(file *zip.File) error {
-	zf, err := file.Open()
-	if err != nil {
-		return err
-	}
-	defer zf.Close()
-
-	f.Numbering.XMLW = XMLNS_W
-	f.Numbering.XMLR = XMLNS_R
-	f.Numbering.XMLWP = XMLNS_WP
-	// f.Document.XMLMC = XMLNS_MC
-	// f.Document.XMLO = XMLNS_O
-	// f.Document.XMLV = XMLNS_V
-	f.Numbering.XMLWPS = XMLNS_WPS
-	f.Numbering.XMLWPC = XMLNS_WPC
-	f.Numbering.XMLWPG = XMLNS_WPG
-	// f.Document.XMLWP14 = XMLNS_WP14
-	f.Numbering.XMLName.Space = XMLNS_W
-	f.Numbering.XMLName.Local = "numbering"
-
-	f.Numbering.file = f
-	//TODO: find last docID
-	f.docID = 100000
-	err = xml.NewDecoder(zf).Decode(&f.Document)
-	return err
-}
+//func (f *Docx) parseNumbering(file *zip.File) error {
+//	zf, err := file.Open()
+//	if err != nil {
+//		return err
+//	}
+//	defer zf.Close()
+//
+//	f.Numbering.XMLW = XMLNS_W
+//	f.Numbering.XMLR = XMLNS_R
+//	f.Numbering.XMLWP = XMLNS_WP
+//	// f.Document.XMLMC = XMLNS_MC
+//	// f.Document.XMLO = XMLNS_O
+//	// f.Document.XMLV = XMLNS_V
+//	f.Numbering.XMLWPS = XMLNS_WPS
+//	f.Numbering.XMLWPC = XMLNS_WPC
+//	f.Numbering.XMLWPG = XMLNS_WPG
+//	// f.Document.XMLWP14 = XMLNS_WP14
+//	f.Numbering.XMLName.Space = XMLNS_W
+//	f.Numbering.XMLName.Local = "numbering"
+//
+//	f.Numbering.file = f
+//	//TODO: find last docID
+//	f.docID = 100000
+//	err = xml.NewDecoder(zf).Decode(&f.Document)
+//	return err
+//}
 
 // parseDocument processes one of the relevant files, the one with the actual document
 func (f *Docx) parseDocument(file *zip.File) error {
