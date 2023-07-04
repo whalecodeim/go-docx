@@ -253,6 +253,11 @@ newdoclop:
 					Type:   `http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable`,
 					Target: "fontTable.xml",
 				},
+				{
+					ID:     "rId3",
+					Type:   `http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering`,
+					Target: "numbering.xml",
+				},
 			},
 		}
 

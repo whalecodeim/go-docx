@@ -36,6 +36,7 @@ var (
 		"word/theme/theme1.xml",
 		"word/fontTable.xml",
 		"word/styles.xml",
+		"word/numbering.xml",
 		"[Content_Types].xml",
 	}
 )

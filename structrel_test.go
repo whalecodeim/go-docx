@@ -47,6 +47,11 @@ func TestRelationships(t *testing.T) {
 				Type:   `http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable`,
 				Target: "fontTable.xml",
 			},
+			{
+				ID:     "rId4",
+				Type:   `http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering`,
+				Target: "numbering.xml",
+			},
 		},
 	}
 	f, err := os.Create("TestRelationships.xml")

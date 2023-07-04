@@ -62,6 +62,11 @@ func newEmptyA4File() *Docx {
 					Type:   `http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable`,
 					Target: "fontTable.xml",
 				},
+				{
+					ID:     "rId4",
+					Type:   `http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering`,
+					Target: "numbering.xml",
+				},
 			},
 		},
 		media:        make([]Media, 0, 64),
