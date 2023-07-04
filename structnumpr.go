@@ -3,7 +3,6 @@ package docx
 import (
 	"encoding/xml"
 	"io"
-	"strconv"
 )
 
 // NumProperties <w:numPr>
@@ -16,13 +15,13 @@ type NumProperties struct {
 // Ilvl ...
 type Ilvl struct {
 	XMLName xml.Name `xml:"w:ilvl,omitempty"`
-	Val     int      `xml:"w:val,attr"`
+	Val     string   `xml:"w:val,attr"`
 }
 
 // NumId ...
 type NumId struct {
 	XMLName xml.Name `xml:"w:numId,omitempty"`
-	Val     int      `xml:"w:val,attr"`
+	Val     string   `xml:"w:val,attr"`
 }
 
 func (p *NumProperties) UnmarshalXML(d *xml.Decoder, _ xml.StartElement) error {
@@ -42,20 +41,12 @@ func (p *NumProperties) UnmarshalXML(d *xml.Decoder, _ xml.StartElement) error {
 				if v == "" {
 					continue
 				}
-				value.Val, err = strconv.Atoi(v)
-				if err != nil {
-					return err
-				}
 				p.Ilvl = &value
 			case "numId":
 				var value NumId
 				v := getAtt(tt.Attr, "val")
 				if v == "" {
 					continue
-				}
-				value.Val, err = strconv.Atoi(v)
-				if err != nil {
-					return err
 				}
 				p.NumId = &value
 			default:
