@@ -10,6 +10,7 @@ type NumProperties struct {
 	XMLName xml.Name `xml:"w:numPr,omitempty"`
 	Ilvl    *Ilvl
 	NumId   *NumId
+	Lvl     *Lvl
 }
 
 // Ilvl ...

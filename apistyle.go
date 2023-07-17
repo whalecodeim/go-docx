@@ -14,7 +14,6 @@ const (
 )
 
 const (
-	Number123 = "1"
-	Numberabc = "2"
+	Number123 = "2"
 	NoNumber  = "3"
 )
