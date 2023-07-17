@@ -23,7 +23,7 @@ func Fumiama() {
 }
 
 func Open() {
-	file, err := os.Open("testdata/test.docx")
+	file, err := os.Open("testdata/123.docx")
 	if err != nil {
 		return
 	}
@@ -39,5 +39,5 @@ func Open() {
 }
 
 func main() {
-	Fumiama()
+	Open()
 }

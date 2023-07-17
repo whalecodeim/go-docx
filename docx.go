@@ -144,7 +144,7 @@ func LoadBodyItems(items []interface{}, media []Media) *Docx {
 		},
 		media:        media,
 		mediaNameIdx: make(map[string]int, 64),
-		rID:          3,
+		rID:          4,
 		slowIDs:      make(map[string]uintptr, 64),
 	}
 	doc.Document.Body.file = doc
