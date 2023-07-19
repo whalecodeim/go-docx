@@ -261,7 +261,7 @@ newdoclop:
 			},
 		}
 
-		ndoc.rID = 3
+		ndoc.rID = 4
 
 		for i, item := range items {
 			switch o := item.(type) {

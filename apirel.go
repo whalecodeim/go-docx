@@ -36,7 +36,7 @@ func (f *Docx) RangeRelationships(iter func(*Relationship) error) error {
 	return nil
 }
 
-func (f *Docx) RangeRelationshipsPicture(blipEmbed string) ([]byte, error) {
+func (f *Docx) RangeRelationshipsPicture(blipEmbed string) ([]byte, string, error) {
 	target := ""
 	for _, r := range f.docRelation.Relationship {
 		if r.ID == blipEmbed {
@@ -44,18 +44,18 @@ func (f *Docx) RangeRelationshipsPicture(blipEmbed string) ([]byte, error) {
 		}
 	}
 	if target == "" {
-		return nil, errors.New("not found")
+		return nil, "", errors.New("not found")
 	}
 	targetList := strings.Split(target, "/")
 	if len(targetList) <= 1 {
-		return nil, errors.New("target value error " + target)
+		return nil, "", errors.New("target value error " + target)
 	}
 	idx, ok := f.mediaNameIdx[targetList[len(targetList)-1]]
 	if !ok {
-		return nil, errors.New("target not found " + target)
+		return nil, "", errors.New("target not found " + target)
 	}
 	if idx < 0 || idx >= len(f.media) {
-		return nil, errors.New("idx out of range " + target)
+		return nil, "", errors.New("idx out of range " + target)
 	}
-	return f.media[idx].Data, nil
+	return f.media[idx].Data, targetList[len(targetList)-1], nil
 }
