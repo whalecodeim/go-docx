@@ -1,4 +1,4 @@
-module github.com/yangge2333/go-docx
+module github.com/whalecodeim/go-docx
 
 go 1.19
 
